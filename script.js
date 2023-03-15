@@ -1,24 +1,16 @@
-// Select the button element
-// Select the header element
-// Add an event listener to the button for the click event
-// Change the text content of the header to "Working, Please Wait"
-// Have a timeout of 5 seconds
-// Change the text content of th header back to "Waiting".
+// grab the button
+// Make GET request with fetch
+// Update the display div with the response
 
 let button = document.querySelector("button");
-let header = document.querySelector("header");
-const workingString = "Working, Please Wait";
-const waitingString = "Waiting";
-const timeToWaitInMs = 5000;
+let div = document.getElementById("displayAPIresult");
 
+let getPokeAPI = async function() {
+    let URL = "https://pokeapi.co/api/v2/";
+    let response = await fetch(URL);
+    let json = await response.json();
 
-let changeHeaderTextToWorking = function (){
-    header.textContent = workingString;
-    setTimeout(changeHeaderTextToWaiting, timeToWaitInMs);
+    div.innerHTML = JSON.stringify(json);
 }
 
-let changeHeaderTextToWaiting = function (){
-    header.textContent = waitingString;
-}
-
-button.addEventListener("click", changeHeaderTextToWorking);
+button.addEventListener("click", getPokeAPI);
